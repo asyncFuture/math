@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group 'de.til'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    extraLibs
+}
+
+dependencies {
+    compileJava.options.encoding = 'UTF-8'
+
+    extraLibs 'org.fusesource.jansi:jansi:2.4.0'
+
+    configurations.implementation.extendsFrom(configurations.extraLibs)
+}
+
+
+jar {
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    manifest {
+        attributes("Implementation-Title": "Gradle", "Implementation-Version": archiveVersion, "Main-Class": 'eu.dulag.math.Bootstrap')
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
