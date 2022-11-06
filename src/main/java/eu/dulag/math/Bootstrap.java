@@ -1,6 +1,5 @@
 package eu.dulag.math;
 
-import de.til.contract.*;
 import eu.dulag.math.contract.*;
 import org.fusesource.jansi.AnsiConsole;
 
@@ -22,7 +21,7 @@ public class Bootstrap {
         this.console = new Console();
         this.console.clear();
         this.register(new Addition(), new Subtraction(), new Multiply(), new Division());
-        this.console.run("§8> ", line -> {
+        this.console.run(Contract.string() + " (§3i§r) > ", line -> {
             console.clear();
             if (line.isEmpty()) return;
             if (!isNumber(line)) {

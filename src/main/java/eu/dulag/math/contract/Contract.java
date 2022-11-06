@@ -27,6 +27,17 @@ public abstract class Contract {
         return CONTRACTS.get(prefix);
     }
 
+    public static String string() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("(");
+        int index = 0;
+        for (String s : CONTRACTS.keySet()) {
+            builder.append("§3" + s);
+            if (index++ < CONTRACTS.size() - 1) builder.append("§r, ");
+        }
+        return builder.append("§f)").toString();
+    }
+
     protected int[] ints = new int[2];
 
     protected int i;
